@@ -1,13 +1,35 @@
 #!/bin/sh
 ##########################################################################
-# UNIX-COBOL 実習環�?構築スクリプト for devcontainer
-# Copyright (C) 2022-2023 SystemGiken Co.Ltd,
+# UNIX-COBOL 実習環境構築スクリプト for devcontainer
 #
-# GnuCOBOL、各種プリプロセ�?サ、ソートツールをサーバにインスト�?�ルします�?
+# GnuCOBOL、データベース用各種プリプロセッサ、ソートツールをインストールし
+# COBOL言語による開月ができる環境を構築します。
 #
-# 動作環�?:
-#   Ubuntu 22.04
+# 動作環境 
+#  - Ubuntu 22.04、24.04 (WSL環境含む)
+# 
+# ライセンス 
+#
+# The MIT License
+#
+# Copyright 2022-2025 SystemGiken Co.Ltd,
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
+# and associated documentation files (the “Software”), to deal in the Software without restriction, 
+# including without limitation the rights to use, copy, modify, merge, publish, distribute, 
+# sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is 
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial 
+# portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING 
+# BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH 
+# THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ##########################################################################
+
 set -eu
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
@@ -31,7 +53,7 @@ echo "Generate ja_JP.SJIS locale ... "
     locale-gen
 }
 
-# パッケージをインスト�?�ルする�?
+# パッケージをインスト�?�ルする�?
 echo "Installing required packages ..."
 {
     apt-get -y update && \
@@ -42,7 +64,7 @@ echo "Installing required packages ..."
 
 cd "${BUILD_DIR}"
 
-## GnuCobol をビルドしてインスト�?�ル
+## GnuCobol をビルドしてインスト�?�ル
 if [ ! -f "${SCRIPT_DIR}/${GNUCOBOL_SRC_PKG}" ]; then
     echo "Downloading GnuCOBOL Source package ..."
     curl -sSL -o "${BUILD_DIR}/${GNUCOBOL_SRC_PKG}" "${GNUCOBOL_SRC_URL}"
@@ -64,7 +86,7 @@ tar xf "${BUILD_DIR}/${GNUCOBOL_SRC_PKG}" --strip-components 1 -C gnucobol
 echo "Done."
 
 
-## Open COBOL ESQL をビルドしてインスト�?�ル
+## Open COBOL ESQL をビルドしてインスト�?�ル
 if [ ! -f "${SCRIPT_DIR}/${OCESQL_SRC_PKG}" ]; then
     echo "Downloading OpenCOBOL-ESQL source package ..."
     OCESQL_SRC_URL="https://github.com/opensourcecobol/Open-COBOL-ESQL/archive/refs/tags/v1.3.tar.gz"

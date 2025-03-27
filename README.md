@@ -10,7 +10,12 @@ COBOL言語をコンパイル、実行ファイルを作成するための環境
 ## 環境構築実行
 
 ``` sh
-git clone https:// ... /CobolEnvBuilder
+git clone https://github.com/giken-github/CobolEnvBuilder.git
 cd CobolEnvBuilder/builder
 sudo bash build.sh
 ```
+
+## ライセンス
+
+環境作成スクリプト及び環境確認用のファイルについては、MIT Licenseとします。
+その他のファイルは、それぞれのライセンスに従ってください。
